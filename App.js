@@ -1,13 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import Splash from './src/screens/Splash';
-
-
+import Home from './src/screens/Home'
+import Login from './src/screens/Login'
 
 
 export default function App() {
   return (
-    <Splash/>
+    <Login/>
+
   );
 }
 
