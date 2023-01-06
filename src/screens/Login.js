@@ -1,97 +1,130 @@
-import React from "react";
-import {
-  View,
-  Text,
+import React,{useState} from "react";
+import { View, 
   StyleSheet,
   Dimensions,
+  SafeAreaView,
+  Text,
   TextInput,
-  Button,
-  TouchableOpacity
-
-    
+  TouchableOpacity,
+  Alert,
+  
 } from "react-native";
 
+import { Button } from "react-native";
 const W = Dimensions.get('window').width;
 const H = Dimensions.get('window').height;
 
 
+export default function Login2() {
 
-export default function Login(){
+const [text, setText] = useState('');
+const [pwd,setPwd] = useState('');
 
-
-  return(
-    <View style = {styles.container}>
+return(
+  <SafeAreaView style={styles.container}>
+     
+    <View style = {styles.section}>
       
-      <View style={styles.logo}>
-        <Text style = {styles.title}>LOGO</Text>  
-      </View>      
 
-      <View style = {styles.section}>
-        <TextInput style ={styles.textBox} placeholder="user,email"></TextInput>
-        <TextInput style ={styles.textBox} placeholder="password"></TextInput>
+
+    <View style = {[styles.section2]}>
+        <TextInput style = {styles.input_txt} placeholder="아이디" 
+          onChangeText={(t => setText(t))}
+          value = {text} 
+          ></TextInput>
+        <TextInput style = {styles.input_txt}
+          placeholder="비밀번호"
+          secureTextEntry
+          onChangeText={t => setPwd(t)}
+          value = {pwd}
+        ></TextInput>
+
+    </View>
+
+    <View style = {styles.section2}>
+
+      <TouchableOpacity style ={styles.login_btn} onPress = {()=>{}}>
+        <Text style = {styles.login_btn_txt}>로그인</Text>
+      </TouchableOpacity>
+      <View style={styles.service}>
+      
+        <Text style={styles.service_txt} onPress = {()=> {Alert.alert('아이디찾기', '아이디찾기')}}>아이디 찾기</Text>
+        <Text style={styles.service_txt} onPress = {()=> {Alert.alert('비밀번호 찾기', '비밀번호찾기')}}>비밀번호 찾기</Text>
+        <Text style={styles.service_txt} onPress = {()=> {Alert.alert('Msg', '회원가입')}}>회원가입</Text>
+        
       </View>
 
-    <View style = {[styles.section,{marginTop: 30}]}>     
-      <View style ={styles.textBox} />
-      <View style = {styles.textBox}/>
-      <View style ={styles.textBox} />
-      <View style = {styles.textBox}/>
-    </View>
-
-    <View style = {styles.section}>
-      <TouchableOpacity style = {[styles.textBox,{backgroundColor:'blue'}]}><Text>로그인</Text></TouchableOpacity>
-    </View>
-
 
     </View>
-  )
+    <View style = {styles.section2}>
+      <Text>소셜 로그인 버튼 </Text>
+    </View>
 
+    </View>
+    
+
+  </SafeAreaView>
+)
 }
 
 
 
+
 const styles = StyleSheet.create({
-  container:{
-    width: W,
-    height: H,
-    backgroundColor:'#aaee9f',
-    alignItems:'center',
-    
-  },
 
-  logo:{    
-    marginTop:80,
-    marginBottom: 30
-    
-  },
-  title:{
-    fontWeight:'bold',
-    fontSize:36,
-    letterSpacing:5,
-    textShadowColor:10
+container:{
+  width:W,
+  height:H,
+  flex: 1,
+  backgroundColor:'#eee',
+  flexDirection:'row',
 
-  },
-  section:{
-    width: W- 80,
-    position:'relative',
-    alignItems:'center',
-    borderWidth: 2,
-    marginBottom:10
+},
+section:{
+  marginTop:60,
+  marginRight: 30,
+  marginLeft:30,
+  flex:1,
+  flexDirection:'column',
+  backgroundColor:'#dedede'
+},
 
-  },
-  textBox:{
-    width: 240, 
-    height: 35, 
-    borderWidth:1, 
-    borderRadius:8, 
-    marginTop : 20,
-    paddingLeft:10
-  }
+section2:{
+  width:'100%',
+  marginTop:10,
 
+},
 
+input_txt:{
+  height: 50,
+  margin: 10,
+  borderBottomWidth:1,
+},
+login_btn:{ 
+  borderWidth:1, 
+  height: 50,
+  borderRadius:4,
+  backgroundColor:'#1133dd',
+  flexDirection:'row',
+  alignItems:'center',
+  justifyContent:'center'
+},
+login_btn_txt:{
+  fontSize:24,
+  color:'white'
+},
+service:{ 
+  marginTop:25,
+  flexDirection:'row',
+  justifyContent:'space-around',
+  paddingRight:40,
+  paddingLeft:40,
+  paddingBottom:4,
+},
+service_txt:{
+  color:'#0000ff',
+}
 
 })
-
-
 
 

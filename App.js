@@ -4,7 +4,6 @@ import Splash from './src/screens/Splash';
 import Home from './src/screens/Home'
 import Login from './src/screens/Login'
 
-
 export default function App() {
   return (
     <Login/>
