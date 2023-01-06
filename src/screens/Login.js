@@ -10,15 +10,45 @@ import { View,
   
 } from "react-native";
 
-import { Button } from "react-native";
+import userDataStorage from "../utils/useDataStorage";
+
+
 const W = Dimensions.get('window').width;
 const H = Dimensions.get('window').height;
 
 
 export default function Login2() {
 
-const [text, setText] = useState('');
+const [id, setId] = useState('');
 const [pwd,setPwd] = useState('');
+const [errCount, setErrCount] = useState(0);
+
+const [state,setState] = useState('')
+
+const login = () =>{
+ 
+  if(id === 'user1'){
+    if(pwd === '1234'){
+      setErrCount(0);
+      userDataStorage.set('auth',id).catch(console.error)
+      userDataStorage.get('auth').then(setState).catch(console.error);
+      console.log("Auth : "+ state);
+      
+
+    }else{
+      Alert.alert("비밀번호 틀렸씁");
+      setErrCount(errCount+1);  
+    }
+
+  }else{
+    Alert.alert('아이디 틀렸슴');
+    setErrCount(errCount+1);
+  }
+
+
+
+}
+
 
 return(
   <SafeAreaView style={styles.container}>
@@ -29,8 +59,8 @@ return(
 
     <View style = {[styles.section2]}>
         <TextInput style = {styles.input_txt} placeholder="아이디" 
-          onChangeText={(t => setText(t))}
-          value = {text} 
+          onChangeText={(t => setId(t))}
+          value = {id} 
           ></TextInput>
         <TextInput style = {styles.input_txt}
           placeholder="비밀번호"
@@ -43,7 +73,7 @@ return(
 
     <View style = {styles.section2}>
 
-      <TouchableOpacity style ={styles.login_btn} onPress = {()=>{}}>
+      <TouchableOpacity style ={styles.login_btn} onPress = {()=>{login()}}>
         <Text style = {styles.login_btn_txt}>로그인</Text>
       </TouchableOpacity>
       <View style={styles.service}>
